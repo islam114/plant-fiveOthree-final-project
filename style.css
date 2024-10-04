@@ -1,0 +1,253 @@
+body {
+    background-image: url("WhatsApp Image 2024-10-04 at 15.02.56_00d241d9.jpg");
+}
+
+.fix {
+    background-attachment: fixed;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    color: rgb(255, 255, 255);
+    font-family: "Afacad Flux", sans-serif;
+    padding: 15px;
+}
+
+.wonder {
+    text-decoration: none;
+  }
+  
+  .wonder:hover {
+    text-decoration: underline;
+  }
+
+.img {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.details {
+    width: 100%;
+    background-color: rgba(114, 114, 114, 0.207);
+    height: 1030px;
+}
+
+.div {
+    margin: 0px;
+}
+
+.uranus {
+    color: #a4c0f3;
+    font-family: "Afacad Flux", sans-serif;
+    font-size: 50px;
+    margin-left: 60px;
+    padding-top: 40px;
+}
+
+#read {
+    color: #b1b1b1d8;
+    font-family: "Afacad Flux", sans-serif;
+    margin-left: 60px;
+    margin-top: -38px;
+    margin-bottom: 59px;
+}
+
+.paragraph {
+    color: #a9a9a9;
+    font-family: "Afacad Flux", sans-serif;
+    margin-left: 250px;
+    font-size: 19px;
+    width: 1070px;
+}
+
+.highlight {
+    font-weight: 800;
+    font-size: large;
+    color: #a4c0f3e8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.team{
+    width: 100%;
+    background-color: rgba(109, 146, 227, 0.29);
+    height: 900px;
+}
+
+.contact{
+    color: #ffffffdc;
+    font-family: "Afacad Flux", sans-serif;
+    font-size: 50px;
+    margin-left: 60px;
+    padding-top: 40px;
+    letter-spacing: -2px;
+}
+
+.us{
+    color: #ffffff94;
+    font-family: "Afacad Flux", sans-serif;
+    margin-left: 63px;
+    margin-top: -38px;
+    margin-bottom: 59px;
+}
+
+.group{
+    color: #ffffffdc;
+    font-family: "Afacad Flux", sans-serif;
+    margin-left: 170px;
+    font-size: 22px;
+    width: 1250px;
+    margin-top: 100px;
+    line-height: 1.5;
+}
+
+.she{
+   margin-left: -85px;
+}
+
+.rahma{
+    background-color: #ffffff2b;
+    width: 580px;
+    height: 175px;
+    padding: 15px;
+    margin-left: 250px;
+    margin-top: 50px;
+    border-radius: 25px;
+}
+.photo{
+    border-radius: 25px;
+    margin-top: -13px;
+    margin-left: -13px;
+}
+
+.name{
+    color: rgb(255, 255, 255);
+    font-family: cursive;
+    font-size: xx-large;
+    margin-left: 190px;
+    margin-top: -180px;
+}
+
+.gmail{
+    margin-left: 300px;
+    margin-top: 20px;
+    filter: grayscale();
+}
+
+:hover.gmail{
+     filter: none;
+}
+
+.link{
+    margin-left: 30px;
+    filter: grayscale();
+    padding-right: 27px;
+}
+
+:hover.link{
+    filter: none;
+}
+
+.demo{
+  margin-left: -200px;
+  margin-top: -20px;
+}
+
+.shorok{
+    background-color: #ffffff2b;
+    width: 580px;
+    height: 175px;
+    padding: 15px;
+    margin-left: 700px;
+    margin-top: 80px;
+    border-radius: 25px;
+    flex-wrap: nowrap;
+}
+
+.photos{
+    border-radius: 25px;
+    position: absolute;
+    top: 2412px;
+    margin-left: 703px;
+}
+
+.names{
+    color: rgb(255, 255, 255);
+    font-family: cursive;
+    font-size: xx-large;
+    margin-left: 890px;
+    margin-top: -180px;
+}
+
+.gmails{
+    margin-left: 1010px;
+    margin-top: 20px;
+    filter: grayscale();
+}
+
+:hover.gmails{
+    filter: none;
+}
+
+.links{
+   margin-left: 30px;
+   filter: grayscale();
+   padding-right: 27px;
+}
+
+:hover.links{
+   filter: none;
+}
+
+.dan{
+    margin-top: 13px;
+    margin-left: -97px;
+}
+.islam{
+    background-color: #ffffff2b;
+    width: 580px;
+    height: 175px;
+    padding: 15px;
+    border-radius: 25px;
+    position: relative;
+    left: 940px;
+    top: -449px;
+}
+
+.mo{
+    color: rgb(255, 255, 255);
+    font-family: cursive;
+    font-size: xx-large;
+    margin-left: 220px;
+    margin-top: -175px;
+}
+
+.him{
+    border-radius: 25px;
+    margin-top: -13px;
+    margin-left: -13px;
+}
+
+.mai{
+    position: absolute;
+    left: 340px;
+    top: 120px;
+    filter: grayscale();
+}
+
+:hover.mai{
+    filter: none;
+}
+
+.end{
+    position: absolute;
+    left: 420px;
+    top: 120px;
+    filter: grayscale();
+}
+
+:hover.end{
+    filter: none;
+}
+

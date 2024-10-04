@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>503 Exoplanet</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+        #sceneContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .img {
+            display: none; /* Hide the image as it is now represented in 3D */
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+        }
+        .btn {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #6599e8;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scene Container for Three.js -->
+    <div id="sceneContainer"></div>
+
+    <!-- UI Controls -->
+    <div id="controls">
+        <h2>Exoplanet Visualization</h2>
+        <p>Use the buttons below to interact:</p>
+        <button class="btn" onclick="toggleAtmosphere()">Toggle Atmosphere</button>
+        <button class="btn" onclick="changeStarField()">Change Star Field</button>
+        <button class="btn" onclick="spinPlanet()">Spin Planet</button>
+    </div>
+    
+
+    <!-- Include Three.js and OrbitControls Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        // Initialize the Scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('sceneContainer').appendChild(renderer.domElement);
+
+        // Orbit Controls for Interactivity
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Create the 3D Exoplanet Sphere
+        const textureLoader = new THREE.TextureLoader();
+        const planetTexture = textureLoader.load('https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg');
+        //const planetTexture = textureLoader.load('pexels-zelch-20376388-removebg-preview.png');
+        //const planetTexture = textureLoader.load('pexels-zelch-20376388.jpg'); // Use the given image texture for 3D representation
+        const planetGeometry = new THREE.SphereGeometry(5, 64, 64);
+        const planetMaterial = new THREE.MeshPhongMaterial({ map: planetTexture });
+        const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+        scene.add(planet);
+
+        // Atmospheric Glow using Shader Material
+        const atmosphereMaterial = new THREE.ShaderMaterial({
+            vertexShader: `
+                varying vec3 vertexNormal;
+                void main() {
+                    vertexNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vertexNormal;
+                void main() {
+                    float intensity = pow(0.7 - dot(vertexNormal, vec3(0, 0, 1.0)), 6.0);
+                    gl_FragColor = vec4(0.0, 0.3, 1.0, 1.0) * intensity;
+                }
+            `,
+            blending: THREE.AdditiveBlending,
+            side: THREE.BackSide
+        });
+        const atmosphere = new THREE.Mesh(planetGeometry.clone(), atmosphereMaterial);
+        atmosphere.scale.set(1.1, 1.1, 1.1);
+        atmosphere.visible = true;
+        scene.add(atmosphere);
+
+        // Star Field Setup
+        const starGeometry = new THREE.BufferGeometry();
+        const starCount = 1000;
+        const starVertices = [];
+        for (let i = 0; i < starCount; i++) {
+            const x = (Math.random() - 0.5) * 2000;
+            const y = (Math.random() - 0.5) * 2000;
+            const z = -Math.random() * 2000;
+            starVertices.push(x, y, z);
+        }
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+
+        const starMaterial = new THREE.PointsMaterial({ color: 0xffffff });
+        const starField = new THREE.Points(starGeometry, starMaterial);
+        scene.add(starField);
+
+        // Lighting Setup
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(20, 20, 20);
+        scene.add(pointLight);
+
+        // Camera positioning
+        camera.position.z = 15;
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // UI Control Functions
+        function toggleAtmosphere() {
+            atmosphere.visible = !atmosphere.visible;
+        }
+        function changeStarField() {
+            starField.rotation.x += Math.PI / 6;
+        }
+    
+        function spinPlanet() {
+            planet.rotation.y += Math.PI / 6;  // Adds a quick spin to the planet
+        }
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
